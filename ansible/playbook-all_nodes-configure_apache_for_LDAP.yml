@@ -23,7 +23,7 @@
     - name: 'Create file index.html in public directory'
       ansible.builtin.copy:
         content: |
-          This is the public folder
+          This is the public directory
 
         dest: '/srv/www/vhosts/apache-server/index.html'
         owner: 'root'
@@ -33,7 +33,7 @@
     - name: 'Create file index.html in secret directory'
       ansible.builtin.copy:
         content: |
-          This is the secret folder
+          This is the secret directory
 
         dest: '/srv/www/vhosts/apache-server/secret/index.html'
         owner: 'root'
@@ -43,7 +43,7 @@
     - name: 'Create file index.html in basicauth directory'
       ansible.builtin.copy:
         content: |
-          This is the basicauth folder
+          This is the basicauth directory
 
         dest: '/srv/www/vhosts/apache-server/basicauth/index.html'
         owner: 'root'
@@ -53,7 +53,7 @@
     - name: 'Create file index.html in ldap directory'
       ansible.builtin.copy:
         content: |
-          This is the ldap folder
+          This is the ldap directory
 
         dest: '/srv/www/vhosts/apache-server/ldap/index.html'
         owner: 'root'
