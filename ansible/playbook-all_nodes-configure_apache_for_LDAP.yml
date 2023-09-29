@@ -4,7 +4,18 @@
   gather_facts: true
   become: true
 
+
   tasks:
+
+    - name: 'Fail if required LDAP settings are not provided'
+      ansible.builtin.fail:
+        msg: "{{ item }} is not defined, aborting..."
+      when:
+        - hostvars[inventory_hostname][item] is undefined
+      loop:
+        - 'ldap_server_url'
+        - 'ldap_binddn_name'
+        - 'ldap_binddn_password'
 
     - name: 'Create directories'
       ansible.builtin.file:
