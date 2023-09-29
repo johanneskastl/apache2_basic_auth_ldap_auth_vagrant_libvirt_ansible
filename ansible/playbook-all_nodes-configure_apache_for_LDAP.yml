@@ -1,0 +1,56 @@
+---
+- name: 'Configure apache2 for LDAP'
+  hosts: 'all'
+  gather_facts: true
+  become: true
+
+  tasks:
+
+    - name: 'Create directories'
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: 'directory'
+        owner: 'root'
+        group: 'root'
+        mode: '0755'
+      loop:
+        - '/srv/www/vhosts/'
+        - '/srv/www/vhosts/apache-server/'
+        - '/srv/www/vhosts/apache-server/secret'
+
+    - name: 'Create file index.html in public directory'
+      ansible.builtin.copy:
+        content: |
+          This is the public folder
+
+        dest: '/srv/www/vhosts/apache-server/index.html'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
+
+    - name: 'Create file index.html in secret directory'
+      ansible.builtin.copy:
+        content: |
+          This is the secret folder
+
+        dest: '/srv/www/vhosts/apache-server/secret/index.html'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
+
+    - name: 'Create vhost-ldap-test.conf'
+      ansible.builtin.template:
+        src: 'vhost-ldap-test.conf.j2'
+        dest: '/etc/apache2/vhosts.d/vhost-ldap-test.conf'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
+      notify:
+        - 'Restart apache2.service'
+
+  handlers:
+
+    - name: 'Restart apache2.service'
+      ansible.builtin.service:
+        name: 'apache2'
+        state: 'restarted'
