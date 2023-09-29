@@ -42,3 +42,6 @@ ansible/group_vars/all/SUSE_LICENSE_KEY.yml
 
 # ignore the test script
 test.sh
+
+# ignore the file containing the LDAP settings
+ansible/group_vars/all/ldap.yml
