@@ -1,0 +1,26 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@dummy-host.example.com
+    ServerName apache-server
+
+    # DocumentRoot: The directory out of which you will serve your
+    # documents. By default, all requests are taken from this directory, but
+    # symbolic links and aliases may be used to point to other locations.
+    DocumentRoot /srv/www/vhosts/apache-server/
+
+    # don't loose time with IP address lookups
+    HostnameLookups Off
+
+    # needed for named virtual hosts
+    UseCanonicalName Off
+
+    # configures the footer on server-generated documents
+    ServerSignature On
+
+    <Directory "/srv/www/vhosts/apache-server/">
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+    </Directory>
+
+</VirtualHost>
+
