@@ -68,6 +68,9 @@
         cmd: 'echo vagrant-ansible-libvirt | /usr/bin/htpasswd -c -i /etc/apache2/htpasswd vagrant-ansible-libvirt'
         creates: '/etc/apache2/htpasswd'
 
+    #
+    # vhost definition
+    #
     - name: 'Create vhost-ldap-test.conf'
       ansible.builtin.template:
         src: 'vhost-ldap-test.conf.j2'
