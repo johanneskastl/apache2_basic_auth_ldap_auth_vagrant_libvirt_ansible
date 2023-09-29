@@ -51,5 +51,23 @@
         Require valid-user
     </Directory>
 
+    # LDAP and BasicAuth
+    <Directory "/srv/www/vhosts/apache-server/secret">
+        Options Indexes FollowSymLinks
+        AllowOverride None
+
+        AuthType Basic
+        AuthName "Basic authentication or LDAP"
+        AuthBasicProvider file ldap
+        # Basic Auth
+        AuthUserFile "/etc/apache2/htpasswd"
+        # LDAP
+        AuthLDAPURL {{ ldap_server_url }}
+        AuthLDAPBindDN {{ ldap_binddn_name }}
+        AuthLDAPBindPassword {{ ldap_binddn_password }}
+        #
+        Require valid-user
+    </Directory>
+
 </VirtualHost>
 
