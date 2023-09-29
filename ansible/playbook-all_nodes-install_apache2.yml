@@ -9,3 +9,4 @@
       vars:
         packages_to_be_installed:
           - apache2
+          - apache2-utils
