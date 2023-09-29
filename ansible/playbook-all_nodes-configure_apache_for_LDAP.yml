@@ -16,6 +16,8 @@
       loop:
         - '/srv/www/vhosts/'
         - '/srv/www/vhosts/apache-server/'
+        - '/srv/www/vhosts/apache-server/basicauth'
+        - '/srv/www/vhosts/apache-server/ldap'
         - '/srv/www/vhosts/apache-server/secret'
 
     - name: 'Create file index.html in public directory'
@@ -34,6 +36,26 @@
           This is the secret folder
 
         dest: '/srv/www/vhosts/apache-server/secret/index.html'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
+
+    - name: 'Create file index.html in basicauth directory'
+      ansible.builtin.copy:
+        content: |
+          This is the basicauth folder
+
+        dest: '/srv/www/vhosts/apache-server/basicauth/index.html'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
+
+    - name: 'Create file index.html in ldap directory'
+      ansible.builtin.copy:
+        content: |
+          This is the ldap folder
+
+        dest: '/srv/www/vhosts/apache-server/ldap/index.html'
         owner: 'root'
         group: 'root'
         mode: '0644'
