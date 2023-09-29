@@ -22,5 +22,17 @@
         Require all granted
     </Directory>
 
+    # BasicAuth
+    <Directory "/srv/www/vhosts/apache-server/basicauth">
+        Options Indexes FollowSymLinks
+        AllowOverride None
+
+        AuthType Basic
+        AuthName "Basic authentication only"
+        AuthBasicProvider file
+        AuthUserFile "/etc/apache2/htpasswd"
+        Require valid-user
+    </Directory>
+
 </VirtualHost>
 
