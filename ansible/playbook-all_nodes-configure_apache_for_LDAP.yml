@@ -69,6 +69,20 @@
         creates: '/etc/apache2/htpasswd'
 
     #
+    # LDAP Authentication
+    #
+    - name: 'Enable apache module '
+      ansible.builtin.lineinfile:
+        path: '/etc/sysconfig/apache2'
+        # regexp: '^APACHE_MODULES="(.*)(\smod_ldap.*){0,1}"$'
+        # line: 'APACHE_MODULES="\1 mod_ldap mod_authnz_ldap"'
+        # backrefs: true
+        regexp: '^APACHE_MODULES=".*"$'
+        line: 'APACHE_MODULES="actions alias auth_basic authn_core authn_file authz_host authz_groupfile authz_core authz_user autoindex cgi dir env expires include log_config mime negotiation setenvif ssl socache_shmcb userdir reqtimeout mod_ldap mod_authnz_ldap"'
+      notify:
+        - 'Restart apache2.service'
+
+    #
     # vhost definition
     #
     - name: 'Create vhost-ldap-test.conf'
