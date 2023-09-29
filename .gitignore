@@ -1,0 +1,41 @@
+#
+# Ignore vagrant-related files
+#
+.vagrant
+Vagrantfile.1
+
+
+#
+# terraform working files
+#
+.terraform
+*.tfstate
+.terraform.lock.hcl
+terraform.tfstate.backup
+.terraform.tfstate.lock.info
+
+#
+# user's own default variables
+#
+terraform.tfvars
+
+# file containing the rendered user_data
+userdata_from_template.txt
+
+# ignore snippet created for /etc/hosts
+etc_hosts_snippet.txt
+
+#
+# ignore some things in subfolder ansible
+# needed for running ansible from the terraform-host
+# e.g. inventory files created by terraform
+ansible/terraform_ansible_inventory
+
+#
+# Ignore the ansible.cfg file if the user
+# has created one
+#
+ansible/ansible.cfg
+
+# put license key in this file, which is not tracked by git
+ansible/group_vars/all/SUSE_LICENSE_KEY.yml
