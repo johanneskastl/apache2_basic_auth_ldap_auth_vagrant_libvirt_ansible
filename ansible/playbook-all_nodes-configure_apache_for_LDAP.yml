@@ -60,6 +60,14 @@
         group: 'root'
         mode: '0644'
 
+    #
+    # Basic Authentication
+    #
+    - name: 'Create file /etc/apache2/htpasswd'
+      ansible.builtin.shell:
+        cmd: 'echo vagrant-ansible-libvirt | /usr/bin/htpasswd -c -i /etc/apache2/htpasswd vagrant-ansible-libvirt'
+        creates: '/etc/apache2/htpasswd'
+
     - name: 'Create vhost-ldap-test.conf'
       ansible.builtin.template:
         src: 'vhost-ldap-test.conf.j2'
