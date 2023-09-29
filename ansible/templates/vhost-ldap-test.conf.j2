@@ -36,5 +36,20 @@
         Require valid-user
     </Directory>
 
+    # LDAP
+    <Directory "/srv/www/vhosts/apache-server/ldap">
+        Options Indexes FollowSymLinks
+        AllowOverride None
+
+        #
+        AuthType Basic
+        AuthBasicProvider ldap
+        AuthName "LDAP"
+        AuthLDAPURL {{ ldap_server_url }}
+        AuthLDAPBindDN {{ ldap_binddn_name }}
+        AuthLDAPBindPassword {{ ldap_binddn_password }}
+        Require valid-user
+    </Directory>
+
 </VirtualHost>
 
