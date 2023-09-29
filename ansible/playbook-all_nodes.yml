@@ -20,3 +20,6 @@
 
 - name: 'Run playbook-all_nodes-start_and_enable_apache2.yml'
   ansible.builtin.import_playbook: playbook-all_nodes-start_and_enable_apache2.yml
+
+- name: 'Run playbook-all_nodes-configure_apache_for_LDAP.yml'
+  ansible.builtin.import_playbook: playbook-all_nodes-configure_apache_for_LDAP.yml
