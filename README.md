@@ -11,6 +11,9 @@ virtual host and creates the necessary directories, so you can test:
 Default OS is openSUSE Leap 15.5. Although that can be changed in the
 Vagrantfile, please beware that this might break the Ansible provisioning.
 
+The username and password for basic auth are extremely secure (ahem) and you
+would never have guessed them: `vagrant-ansible-libvirt`
+
 ## Vagrant
 
 1. You need vagrant obviously. And ansible. And git...
@@ -56,25 +59,28 @@ ldap_binddn_password: 'totallysecretpassword'
 
 ## Testing the setup
 
+You can use the script `test_endpoints.sh` to test access to all of the
+endpoints, by calling the script with the IP address as only argument.
+
+Here is the script's output:
+
+```bash
+$ ./test.sh 192.0.2.123
+This is the public directory
+This is the basicauth directory
+This is the secret directory
+$
 ```
-#!/bin/bash
 
-[[ "$#" == "1" ]] || {
-    echo "Please provide the server name or IP address as only argument"
-    exit 1
-}
+For testing the LDAP authentication, you can use curl against the `.../ldap/`
+and `http://.../secret/` endpoints:
 
-SERVER="${1}"
-
-# public directory
-curl -s "http://${SERVER}/"
-
-# basicauth directory
-curl -s -u vagrant-ansible-libvirt:vagrant-ansible-libvirt "http://${SERVER}/basicauth/"
-
-# secret directory using basic auth user
-curl -s -u vagrant-ansible-libvirt:vagrant-ansible-libvirt "http://${SERVER}/secret/"
-
+```bash
+$ curl -s -u ldap-user:ldap-password "http://192.0.2.123/ldap/"
+This is the ldap directory
+$ curl -s -u ldap-user:ldap-password "http://192.0.2.123/secret/"
+This is the secret directory
+$
 ```
 
 ## Disabling the Ansible provisioning
